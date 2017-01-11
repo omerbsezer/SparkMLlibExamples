@@ -54,7 +54,7 @@ object scenario1 {
     val dataForCS = Window.partitionBy("sensorId").orderBy("value").rowsBetween(Long.MinValue, 0)
     
     
-    
+    //showTable
     val movingAverageTable = dft.select($"sensorId",$"timestamp",$"value",avg($"value").over(dataWithWindow),avg($"value").over(allData),sum($"value").over(dataForCS))
     movingAverageTable.show
     
