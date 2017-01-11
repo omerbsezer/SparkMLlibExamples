@@ -11,6 +11,7 @@ import org.apache.spark.sql.functions._
 
 
 object scenario1 {
+  
    def main(args: Array[String]) {
      //Start the Spark context
     val conf = new SparkConf().setAppName("scenario1").setMaster("local")
