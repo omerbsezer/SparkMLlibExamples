@@ -26,7 +26,7 @@ object scenario2_ {
     
     // Build linear regression model
     var regression = new LinearRegressionWithSGD().setIntercept(true)
-    regression.optimizer.setStepSize(0.001)
+    regression.optimizer.setStepSize(0.0035)
     val model = regression.run(parsedData)
     
     // Export linear regression model to PMML
@@ -39,6 +39,9 @@ object scenario2_ {
     //  (quality: 7)
     predictedValue = model.predict(Vectors.dense(11.5,0.54,0.71,4.4,0.124,6,15,0.9984,3.01,0.83,11.8))
     println("predictedValue2:"+predictedValue ) 
+    // (quality: 6)
+    predictedValue = model.predict(Vectors.dense(11.1,0.18,0.48,1.5,0.068,7,15,0.9973,3.22,0.64,10.1))
+    println("predictedValue3:"+predictedValue ) 
     
     //source:https://github.com/selvinsource/spark-pmml-exporter-validator
    }

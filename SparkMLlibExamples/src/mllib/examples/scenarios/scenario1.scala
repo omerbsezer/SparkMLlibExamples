@@ -1,7 +1,6 @@
 package mllib.examples.scenarios
 
 import java.util.Scanner
-import java.util.Scanner
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.ml.classification.NaiveBayes
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
@@ -10,6 +9,10 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions._
+import org.apache.spark.mllib.linalg.Vector
+import org.apache.spark.mllib.stat.{MultivariateStatisticalSummary, Statistics}
+import org.apache.spark.sql.functions.{stddev_samp, stddev_pop}
+
 
 
 object scenario1 {
@@ -95,8 +98,14 @@ object scenario1 {
         val movingAverageTable = dft.select($"sensorId",$"timestamp",$"value",max($"value").over(allData),min($"value").over(allData),avg($"value").over(dataWithWindow),avg($"value").over(allData),sum($"value").over(dataForCS))
        
         //showTable 
-        movingAverageTable.show    
+        movingAverageTable.show  
+        
+      
+        // sensorId|timestamp|value|variance(value) |standard_deviation(value) |min(value) |avg(value) 
+        val numericTable = dft.select($"sensorId",$"timestamp",$"value",variance($"value").over(allData),stddev_pop($"value").over(allData),min($"value").over(allData),avg($"value").over(dataWithWindow))
          
+         //showTable 
+        numericTable.show  
     }
      
     
