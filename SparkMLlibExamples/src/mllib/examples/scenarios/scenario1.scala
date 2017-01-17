@@ -15,7 +15,7 @@ import org.apache.spark.sql.functions.{stddev_samp, stddev_pop}
 
 
 
-object scenario1 {
+object value {
   
    case class SensorTelemetry(sensorId: String, timestamp: String, value: Float)
     def parseData(str: String): SensorTelemetry = {
@@ -44,6 +44,7 @@ object scenario1 {
        println("Sensor TLM From Txt:") 
        val sensorTlmDF = spark.read.textFile("sensor_telemetries_data.txt").map(parseData).toDF()
        sensorTlmDF.select('*).show()
+       sensorTlmDF.select("value")
        // Calculate the moving average with 5 values before 2 and after 2
        val dataWithWindow = Window.partitionBy("sensorId").rowsBetween(-2, 2)
         
