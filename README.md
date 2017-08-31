@@ -1,5 +1,5 @@
-# SparkMLlibExamples
-Spark MLlib Examples
+# SparkMLlibExamples (Scala)
+Spark MLlib Examples (Scala)
 
 Apache Spark-installation-on-windows-10
 
